@@ -1,0 +1,46 @@
+diff --git a/node_modules/@reduxjs/toolkit/dist/query/index.d.mts b/node_modules/@reduxjs/toolkit/dist/query/index.d.mts
+index 6af0025..438fe27 100644
+--- a/node_modules/@reduxjs/toolkit/dist/query/index.d.mts
++++ b/node_modules/@reduxjs/toolkit/dist/query/index.d.mts
+@@ -2728,20 +2728,20 @@ interface FetchArgs extends CustomRequestInit {
+      */
+     timeout?: number;
+ }
+-type FetchBaseQueryError = {
++type FetchBaseQueryError<T> = {
+     /**
+      * * `number`:
+      *   HTTP status code
+      */
+     status: number;
+-    data: unknown;
++    data: T;
+ } | {
+     /**
+      * * `"FETCH_ERROR"`:
+      *   An error that occurred during execution of `fetch` or the `fetchFn` callback option
+      **/
+     status: 'FETCH_ERROR';
+-    data?: undefined;
++    data?: T;
+     error: string;
+ } | {
+     /**
+@@ -2760,7 +2760,7 @@ type FetchBaseQueryError = {
+      *   Request timed out
+      **/
+     status: 'TIMEOUT_ERROR';
+-    data?: undefined;
++    data?: T;
+     error: string;
+ } | {
+     /**
+@@ -2768,7 +2768,7 @@ type FetchBaseQueryError = {
+      *   A custom error type that you can return from your `queryFn` where another error might not make sense.
+      **/
+     status: 'CUSTOM_ERROR';
+-    data?: unknown;
++    data?: T;
+     error: string;
+ };
+ type FetchBaseQueryArgs = {
